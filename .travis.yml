@@ -1,0 +1,33 @@
+dist: trusty
+sudo: true
+
+language: node_js
+node_js:
+  - "8"
+
+cache:
+  directories:
+     - ./server/node_modules
+     - ./website/node_modules
+     - /usr/lib/python2.7/dist-packages
+
+before_install:
+  - sudo apt-get install python-pip python-dev build-essential 
+  - sudo pip install --upgrade pip
+  - sudo pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.1.0-cp27-none-linux_x86_64.whl
+
+install:
+  - cd ./website && npm install && cd ..
+  - cd ./server $$ npm install && cd ..
+
+script:
+  - cd ./website && npm run-script build && cd ..
+  - mv ./website/dist/ ./server/dist/
+  - cd ./server && npm test
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
+services: mongodb
