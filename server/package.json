@@ -12,6 +12,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "formidable": "^1.1.1",
     "jshint": "^2.9.5",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.9.9",
