@@ -2,3 +2,11 @@
   <h1>Uranus Eyes Plus</h1>
   <h2>Web service system for atmosphere cloud classification </h2>
 </div>
+<div>
+  <h2>Photo Upload</h2>
+  <nz-progress [ngModel]="_percent"></nz-progress>
+  <button nz-button [nzType]="'primary'" (click)="upload()">
+    <span>Upload File</span>
+  </button>
+  <input #fileInput type="file" accept="image/*">
+</div>

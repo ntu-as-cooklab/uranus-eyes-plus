@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,9 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot()
+  ],
+  providers: [
+    AppService
   ],
   bootstrap: [AppComponent]
 })

@@ -38,9 +38,8 @@ function runServer() {
   app.use(cors());
 
   // ===== API =====
-  let api = require('./routes/api');
-  app.use('/api', api);
-
+  app.use('/api', require('./routes/api'));
+  app.use('/upload', require('./routes/upload'));
   // ===== Front End =====
   app.use('/', express.static(path.join(__dirname, '../dist/')));
   // Send all other requests to the Angular app
