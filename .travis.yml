@@ -18,7 +18,7 @@ before_install:
 
 install:
   - cd ./website && npm install && cd ..
-  - cd ./server $$ npm install && cd ..
+  - cd ./server && npm install && cd ..
 
 script:
   - cd ./website && npm run-script build && cd ..

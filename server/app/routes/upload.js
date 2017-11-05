@@ -10,14 +10,19 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../../config')[env];
 
 uplaod.post('/', (req, res) => {
+    // Check if the folder exist
+    const dir = config.dataPath;
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, '0755');
+      fs.chmodSync(dir, '0755');
+    }
+
     // create an incoming form object
     const form = new formidable.IncomingForm();
-
     // specify that we want to allow the user to upload multiple files in a single request
     form.multiples = false;
-
     // store all uploads in the /uploads directory
-    form.uploadDir = path.join(__dirname, '../../data');
+    form.uploadDir = config.dataPath;
 
     form.parse(req);
 
