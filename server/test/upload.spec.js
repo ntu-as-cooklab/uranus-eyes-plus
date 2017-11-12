@@ -2,8 +2,10 @@
 
 let request = require('supertest');
 const assert = require('assert');
+const Logger = require('node-color-log');
 const path = require('path');
-var fs = require('fs');
+const fs = require('fs');
+const logger = new Logger();
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config')[env];
@@ -11,7 +13,7 @@ const config = require('../config')[env];
 describe('=== Check Upload ===', () => {
   let server;
   beforeEach(done => {
-    console.log('   -------');
+    logger.info('Start a new test case...');
     server = require('../app/app')();
     server.on('started', done);
   });
@@ -22,9 +24,11 @@ describe('=== Check Upload ===', () => {
   it('responds to /upload', done => {
     const dir = config.dataPath;
     if (!fs.existsSync(dir)) {
+      logger.log(`Target ${dir} not exists. Creating...`);
       fs.mkdirSync(dir, '0755');
       fs.chmodSync(dir, '0755');
     }
+    logger.degug('Create dummy file to test upload.');
     const filePath = path.join(dir, 'test.jpg');
     const fileUpload = 'test_upload.jpg';
     const filePathUpload = path.join(dir, fileUpload);
@@ -34,9 +38,10 @@ describe('=== Check Upload ===', () => {
       .attach('image', filePath, fileUpload)
       .expect(200)
       .end((err, res) => {
+        logger.degug('Check if the file has been upload.')
         assert.equal(fs.existsSync(filePathUpload), true);
         assert.equal(res.body.success, true);
-        // Clean folder
+        logger.degug('Comfirmed passed. Clean the testes files.')
         fs.unlinkSync(filePath);
         fs.unlinkSync(filePathUpload);
         done();
