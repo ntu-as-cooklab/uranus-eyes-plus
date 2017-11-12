@@ -29,6 +29,9 @@ function runServer() {
     console.log('Mongo DB connected successfully!');
   });
 
+  // ===== Initial processes
+  require('./functions/initEnv')();
+
   // ===== Middleware =====
   app.use(morgan('dev'));
   app.use(bodyParser.json());
