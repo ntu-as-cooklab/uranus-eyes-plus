@@ -8,6 +8,6 @@ module.exports = {
     test: {
         'nosqldb': 'mongodb://localhost:27017/SPPAtest',
         'port': 8880,
-        'dataPath': path.join(__dirname, 'data/test')
+        'dataPath': path.join(__dirname, 'data-test')
     }
 }

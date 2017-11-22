@@ -24,11 +24,11 @@ describe('=== Check Upload ===', () => {
   it('responds to /upload', done => {
     const dir = config.dataPath;
     if (!fs.existsSync(dir)) {
-      logger.log(`Target ${dir} not exists. Creating...`);
+      logger.debug(`Target ${dir} not exists. Creating...`);
       fs.mkdirSync(dir, '0755');
       fs.chmodSync(dir, '0755');
     }
-    logger.degug('Create dummy file to test upload.');
+    logger.debug('Create dummy file to test upload.');
     const filePath = path.join(dir, 'test.jpg');
     const fileUpload = 'test_upload.jpg';
     const filePathUpload = path.join(dir, fileUpload);
@@ -38,10 +38,10 @@ describe('=== Check Upload ===', () => {
       .attach('image', filePath, fileUpload)
       .expect(200)
       .end((err, res) => {
-        logger.degug('Check if the file has been upload.')
+        logger.debug('Check if the file has been upload.')
         assert.equal(fs.existsSync(filePathUpload), true);
         assert.equal(res.body.success, true);
-        logger.degug('Comfirmed passed. Clean the testes files.')
+        logger.debug('Comfirmed passed. Clean the testes files.')
         fs.unlinkSync(filePath);
         fs.unlinkSync(filePathUpload);
         done();
