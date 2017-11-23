@@ -19,7 +19,8 @@
     "morgan": "^1.8.1",
     "node-color-log": "^1.0.1",
     "password-hash-and-salt": "^0.1.4",
-    "rxjs": "^5.5.0"
+    "rxjs": "^5.5.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
