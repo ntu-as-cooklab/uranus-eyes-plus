@@ -25,7 +25,7 @@ uplaod.post('/', (req, res) => {
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name with UUID
     form.on('file', (field, file) => {
-        fs.rename(file.path, path.join(form.uploadDir, uuid()+file.name));
+        fs.rename(file.path, path.join(form.uploadDir, `${uuid()}-${file.name}`));
     });
 
     // log any errors that occur

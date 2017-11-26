@@ -26,6 +26,7 @@ if [ $1 = 'test' ]
 then 
     cd server
     npm test
+    rm -rf ./data-test
 fi
 if [ $1 = 'install' ]
 then 

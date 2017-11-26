@@ -29,21 +29,22 @@ describe('=== Check Upload ===', () => {
       fs.chmodSync(dir, '0755');
     }
     logger.debug('Create dummy file to test upload.');
-    const filePath = path.join(dir, 'test.jpg');
-    const fileUpload = 'test_upload.jpg';
-    const filePathUpload = path.join(dir, fileUpload);
+    const filename = 'test.jpg';
+    const target = 'cirrus';
+    const filePath = path.join(dir, filename);
+    const fileUploadPath = path.join(dir, target);
     fs.writeFileSync(filePath, '');
     request(server)
       .post('/upload')
-      .attach('image', filePath, fileUpload)
+      .field('target', target)
+      .attach('image', filePath, filename)
       .expect(200)
       .end((err, res) => {
         logger.debug('Check if the file has been upload.')
-        assert.equal(fs.existsSync(filePathUpload), true);
+        const files = fs.readdirSync(fileUploadPath);
+        assert.equal(files.length, 1);
         assert.equal(res.body.success, true);
         logger.debug('Comfirmed passed. Clean the testes files.')
-        fs.unlinkSync(filePath);
-        fs.unlinkSync(filePathUpload);
         done();
       })
   });
