@@ -11,6 +11,7 @@ declare let $: any;
 export class HomeComponent {
 
   _percent = 0;
+  target = '';
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -25,6 +26,7 @@ export class HomeComponent {
       const formData = new FormData();
       const file = fileBrowser.files[0];
       formData.append('upload', file, file.name);
+      formData.append('target', this.target);
       this.service.uploadSingleFile(formData)
         .map(response => response.json())
         .subscribe(data => {
