@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 export class AppService {
 
   API_LINK = {
-    UPLOAD: '/upload'
+    UPLOAD: '/upload',
+    GET_RESULT: '/api/getResult'
   };
 
   constructor(private http: Http) { }
@@ -14,6 +15,12 @@ export class AppService {
   uploadSingleFile(data) {
     return this.http.post(
       this.API_LINK.UPLOAD, data
+    );
+  }
+
+  getResult(data) {
+    return this.http.post(
+      this.API_LINK.GET_RESULT, data
     );
   }
 

@@ -25,6 +25,7 @@ export class HomeComponent {
     'cumulonimbus'
   ];
   options = [];
+  result;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -58,10 +59,26 @@ export class HomeComponent {
         .subscribe(data => {
           if (data.success) {
             this._percent = 100;
+            this.getResult({
+              target: data.target,
+              uuid: data.uuid
+            });
           } else {
             //
           }
         });
     }
+  }
+
+  getResult(data) {
+    this.service.getResult(data)
+    .map(response => response.json())
+    .subscribe(res => {
+      if (res.success) {
+        this.result = res.data;
+      } else {
+        //
+      }
+    });
   }
 }
