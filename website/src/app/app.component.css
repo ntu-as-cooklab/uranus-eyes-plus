@@ -1,8 +1,10 @@
-:host ::ng-deep .logo {
+.logo {
   width: 120px;
   height: 31px;
   background: #333;
+  color: white;
   border-radius: 6px;
   margin: 16px 28px 16px 0;
-  float: left;
+  font-size: large;
+  line-height: 32çpx;
 }

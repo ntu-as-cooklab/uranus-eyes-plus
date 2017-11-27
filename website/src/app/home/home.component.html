@@ -1,12 +1,24 @@
-<div>
-  <h1>Uranus Eyes Plus</h1>
-  <h2>Web service system for atmosphere cloud classification </h2>
-</div>
-<div>
-  <h2>Photo Upload</h2>
-  <nz-progress [ngModel]="_percent"></nz-progress>
-  <button nz-button [nzType]="'primary'" (click)="upload()">
-    <span>Upload File</span>
-  </button>
-  <input #fileInput type="file" accept="image/*">
+<div align="center">
+  <div>
+    <h1>Uranus Eyes Plus</h1>
+    <h2>Web service system for atmosphere cloud classification </h2>
+  </div>
+  <div class="upload">
+    <h2>Photo Upload</h2>
+    <nz-progress [ngModel]="_percent"></nz-progress>
+    <nz-select class="selector" [(ngModel)]="target"  [nzPlaceHolder]="'Choose the cloud type'" nzAllowClear>
+      <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value">
+      </nz-option>
+    </nz-select>
+    <form class="uploadForm" action="#">
+      <p class="file">
+        <input #fileInput type="file" accept="image/*" (change)="getFileName()">
+        <label for="file">Browse Image</label>
+      </p>
+      <p>{{fileName}}</p>
+    </form>
+    <button nz-button [nzType]="'primary'" (click)="upload()">
+      <span>Upload File</span>
+    </button>
+  </div>
 </div>
