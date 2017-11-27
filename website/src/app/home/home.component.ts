@@ -10,7 +10,7 @@ declare let $: any;
 })
 export class HomeComponent {
   _percent = 0;
-  target;
+  target = 'cirrus';
   fileName = '';
   optionsName = [
     'cirrus',

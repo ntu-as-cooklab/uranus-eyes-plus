@@ -6,7 +6,7 @@
   <div class="upload">
     <h2>Photo Upload</h2>
     <nz-progress [ngModel]="_percent"></nz-progress>
-    <nz-select class="selector" [(ngModel)]="target"  [nzPlaceHolder]="'Choose the cloud type'" nzAllowClear>
+    <nz-select class="selector" [(ngModel)]="target" nzAllowClear>
       <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value">
       </nz-option>
     </nz-select>
