@@ -30,7 +30,7 @@ describe('=== Check Upload ===', () => {
     }
     logger.debug('Create dummy file to test upload.');
     const filename = 'test.jpg';
-    const target = 'cirrus';
+    const target = 'altostratus';
     const filePath = path.join(dir, filename);
     const fileUploadPath = path.join(dir, target);
     fs.writeFileSync(filePath, '');
@@ -42,7 +42,10 @@ describe('=== Check Upload ===', () => {
       .end((err, res) => {
         logger.debug('Check if the file has been upload.')
         const files = fs.readdirSync(fileUploadPath);
+        // only upload a file
         assert.equal(files.length, 1);
+        // comfirm the name is right
+        assert.equal(res.body.filename, files[0]);
         assert.equal(res.body.success, true);
         logger.debug('Comfirmed passed. Clean the testes files.')
         done();

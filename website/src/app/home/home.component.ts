@@ -11,7 +11,8 @@ declare let $: any;
 export class HomeComponent {
   _percent = 0;
   target = 'cirrus';
-  fileName = '';
+  inputFileName = '';
+  filename = '';
   optionsName = [
     'cirrus',
     'cirrostratus',
@@ -42,7 +43,7 @@ export class HomeComponent {
     const fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
       const file = fileBrowser.files[0];
-      this.fileName = file.name;
+      this.inputFileName = file.name;
     }
   }
 
@@ -61,7 +62,7 @@ export class HomeComponent {
             this._percent = 100;
             this.getResult({
               target: data.target,
-              uuid: data.uuid
+              filename: data.filename
             });
           } else {
             //
@@ -75,7 +76,7 @@ export class HomeComponent {
     .map(response => response.json())
     .subscribe(res => {
       if (res.success) {
-        this.result = res.data;
+        this.result = res.result;
       } else {
         //
       }

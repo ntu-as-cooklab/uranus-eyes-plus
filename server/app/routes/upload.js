@@ -14,6 +14,7 @@ uplaod.post('/', (req, res) => {
 
     const img_uuid = uuid();
     let target = "";
+    let filename;
 
     // create an incoming form object
     const form = new formidable.IncomingForm();
@@ -30,20 +31,26 @@ uplaod.post('/', (req, res) => {
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name with UUID
     form.on('file', (field, file) => {
-        fs.rename(file.path, path.join(form.uploadDir, `${img_uuid}-${file.name}`));
+        filename = `${img_uuid}-${file.name}`;
+        fs.rename(file.path, path.join(form.uploadDir, filename));
+        return res.json({
+            success: true,
+            filename: filename,
+            target: target,
+            message: 'Upload done.'
+        });
     });
 
     // log any errors that occur
     form.on('error', err => {
-        console.log('An error has occured: \n' + err);
+        logger.error('An error has occured: \n' + err);
+        return res.json({
+            success: false,
+            message: 'Upload failed.'
+        })
     })
 
-    return res.json({
-        success: true,
-        uuid: img_uuid,
-        target: target,
-        message: 'Upload done.'
-    })
+
 });
 
 module.exports = uplaod;

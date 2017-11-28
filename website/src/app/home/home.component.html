@@ -15,10 +15,13 @@
         <input #fileInput type="file" accept="image/*" (change)="getFileName()">
         <label for="file">Browse Image</label>
       </p>
-      <p>{{fileName}}</p>
+      <p>{{inputFileName}}</p>
     </form>
     <button nz-button [nzType]="'primary'" (click)="upload()">
       <span>Upload File</span>
     </button>
+  </div>
+  <div>
+    {{result}}
   </div>
 </div>
