@@ -4,6 +4,10 @@ Web service for cloud classification.
 
 This is a research project that want to collect more classified photos of atmosphere cloud. Via the collecting data, we can train better models to classify cloud photos. Currently the model is traind by simple deep learnign with the [this data](https://github.com/tigercosmos/Uranus-Eyes/releases/download/v0.0.1/photo.tar.gz), which is collected from atmosphere organizations.
 
+## Demo
+
+<img alt="Demo" src="https://raw.githubusercontent.com/tigercosmos/uranus-eyes-plus/master/assets/demo.png" height="800">
+
 ## Setup
 
 `NodeJs` with `npm` and `MongoDB` are required.
