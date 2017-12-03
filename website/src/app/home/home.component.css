@@ -7,7 +7,7 @@ h2 {
 }
 
 .upload {
-  width: 40%;
+  width: 200px;
   padding: 20px;
 }
 
@@ -42,10 +42,14 @@ h2 {
 }
 
 .selector {
-  width: 70%;
+  width: 170px;
   padding: 10px;
 }
 
 .uploadForm {
   padding: 10px;
+}
+
+.preview {
+  max-width:180px;
 }

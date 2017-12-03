@@ -29,6 +29,7 @@ export class HomeComponent {
   result;
 
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('imgPreview') imgPreview: ElementRef;
 
   constructor(private el: ElementRef, private service: AppService) {
     this.optionsName.forEach(e => {
@@ -44,6 +45,11 @@ export class HomeComponent {
     if (fileBrowser.files && fileBrowser.files[0]) {
       const file = fileBrowser.files[0];
       this.inputFileName = file.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imgPreview.nativeElement.src = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
