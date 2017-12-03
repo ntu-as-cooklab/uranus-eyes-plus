@@ -24,6 +24,10 @@ chmod +x ./tool
 
 Website uses Angular, and server use NodeJS.
 
+### Setting
+
+Modify `server/config.js` to change `port`, `DB`, and `data`
+
 ### Build
 
 only build the frontend website
@@ -50,7 +54,7 @@ build the website and run the server on `127.0.0.1:3000`.
 
 ### Test
 
-server unit test
+server unit test on `127.0.0.1:8888`.
 
 ```bash
 ./tool test
@@ -58,7 +62,7 @@ server unit test
 
 ## Publish
 
-Run product serivce
+Run product serivce on `127.0.0.1:8000`. You can use `nginx` service to pass it to `80` port.
 
 ```bash
 ./tool publish
