@@ -5,7 +5,7 @@
   "author": "tigercosmos <b04209032@ntu.edu.tw>",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js && mongod",
+    "watch": "nodemon server.js",
     "test": "NODE_ENV=test mocha"
   },
   "dependencies": {

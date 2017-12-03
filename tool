@@ -33,3 +33,13 @@ then
   cd ./website && npm install && cd ..
   cd ./server && npm install && cd ..
 fi
+if [ $1 = 'publish' ]
+then 
+    cd website
+    npm run-script build
+    cd ..
+    rm -rf server/dist
+    mv website/dist/ server/dist/
+    cd server
+    NODE_ENV=product npm start
+fi
