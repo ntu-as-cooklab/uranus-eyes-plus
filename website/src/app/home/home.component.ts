@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd';
 import { AppService } from '../app.service';
 import 'rxjs/add/operator/map';
 declare let $: any;
@@ -11,7 +12,9 @@ declare let $: any;
 export class HomeComponent {
   _percent = 0;
   target = 'cirrus';
-  inputFileName = '';
+  inputFileName = 'note: jpg only';
+  isResultShowed = false;
+  isResultWaiting = true;
   filename = '';
   optionsName = [
     'cirrus',
@@ -31,7 +34,11 @@ export class HomeComponent {
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('imgPreview') imgPreview: ElementRef;
 
-  constructor(private el: ElementRef, private service: AppService) {
+  constructor(
+    private el: ElementRef,
+    private service: AppService,
+    private nns: NzNotificationService
+  ) {
     this.optionsName.forEach(e => {
       this.options.push({
         value: e,
@@ -66,12 +73,16 @@ export class HomeComponent {
         .subscribe(data => {
           if (data.success) {
             this._percent = 100;
+            this.isResultShowed = true;
             this.getResult({
               target: data.target,
               filename: data.filename
             });
           } else {
-            //
+            this.nns.create('error',
+              'Error',
+              'Upload image failed! Please try again.'
+            );
           }
         });
     }
@@ -79,13 +90,17 @@ export class HomeComponent {
 
   getResult(data) {
     this.service.getResult(data)
-    .map(response => response.json())
-    .subscribe(res => {
-      if (res.success) {
-        this.result = res.result;
-      } else {
-        //
-      }
-    });
+      .map(response => response.json())
+      .subscribe(res => {
+        if (res.success) {
+          this.result = res.result;
+          this.isResultWaiting = false;
+        } else {
+          this.nns.create('error',
+            'Error',
+            'Cannot analyze image! Please try again.'
+          );
+        }
+      });
   }
 }

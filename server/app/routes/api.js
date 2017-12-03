@@ -35,7 +35,7 @@ api.post('/getResult', (req, res) => {
         isSuccess = true;
         return res.json({
             success: true,
-            result: stdout,
+            result: JSON.parse(stdout),
             message: 'get the result'
         })
         if (error !== null) {

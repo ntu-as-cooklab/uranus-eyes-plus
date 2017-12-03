@@ -13,10 +13,9 @@
     <img #imgPreview class="preview">
     <form class="uploadForm" action="#">
       <p class="file">
-        <input #fileInput type="file" accept=".jpg" (change)="getFileName()">
+        <input #fileInput type="file" accept="image/jpeg" (change)="getFileName()">
         <label for="file">Browse Image</label>
       </p>
-      <p>note: jpg only</p>
       <p>{{inputFileName}}</p>
     </form>
     <button nz-button [nzType]="'primary'" (click)="upload()">
@@ -24,7 +23,15 @@
     </button>
     <nz-progress [ngModel]="_percent"></nz-progress>
   </div>
-  <div>
-    {{result}}
+  <div *ngIf="isResultShowed">
+    <p *ngIf="isResultWaiting">
+      Wainting for calculaton ...
+    </p>
+    <h2 *ngIf="!isResultWaiting">Result</h2>
+    <div *ngFor="let line of result; let i = index">
+      <div *ngIf="i &lt; 3">
+        {{line}}
+      </div>
+    </div>
   </div>
 </div>

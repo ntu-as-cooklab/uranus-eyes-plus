@@ -1,5 +1,5 @@
 import os, sys
-
+import json
 import tensorflow as tf
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -31,8 +31,11 @@ with tf.Session() as sess:
 
     # Sort to show labels of first prediction in order of confidence
     top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
-
+    outputData = []
     for node_id in top_k:
         human_string = label_lines[node_id]
         score = predictions[0][node_id]
-        print('%s (score = %.5f)' % (human_string, score))
+        text = '%s: %.2f' % (human_string, score)
+        outputData.append(text)
+    
+    print(json.dumps(outputData))
