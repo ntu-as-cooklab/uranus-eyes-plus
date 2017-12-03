@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+      - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: sudo apt-get install python-pip python-dev build-essential 
+      - run: sudo pip install --upgrade pip
+      - run: sudo pip install --ignore-installed --upgrade tensorflow
+      - run: sudo chmod +x ./tool
+      - run: ./tool install
+      - run: ./tool build
+      - run: ./tool test
