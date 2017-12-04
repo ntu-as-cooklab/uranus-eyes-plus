@@ -2,6 +2,7 @@
   <div>
     <h1>Uranus Eyes Plus</h1>
     <h2>Web service for cloud classification</h2>
+    <p>Your upload image will be used for training next model.</p>
   </div>
   <div class="upload">
     <h2>Photo Upload</h2>
@@ -27,7 +28,10 @@
     <p *ngIf="isResultWaiting">
       Wainting for calculaton ...
     </p>
-    <h2 *ngIf="!isResultWaiting">Result</h2>
+    <div *ngIf="!isResultWaiting">
+      <h2 >Result</h2>
+      <p>Via our current model, we get:</p>
+    </div>
     <div *ngFor="let line of result; let i = index">
       <div *ngIf="i &lt; 3">
         {{line}}
