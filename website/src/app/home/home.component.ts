@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { AppService } from '../app.service';
-import 'rxjs/add/operator/map';
+import 'rxjs/operators/map';
 declare let $: any;
 
 @Component({
@@ -69,14 +69,13 @@ export class HomeComponent {
       formData.append('target', this.target);
       this.service
         .uploadSingleFile(formData)
-        .map(response => response.json())
         .subscribe(data => {
-          if (data.success) {
+          if (data['success']) {
             this._percent = 100;
             this.isResultShowed = true;
             this.getResult({
-              target: data.target,
-              filename: data.filename
+              target: data['target'],
+              filename: data['filename']
             });
           } else {
             this.nns.create('error',
@@ -90,10 +89,9 @@ export class HomeComponent {
 
   getResult(data) {
     this.service.getResult(data)
-      .map(response => response.json())
       .subscribe(res => {
-        if (res.success) {
-          this.result = res.result;
+        if (res['success']) {
+          this.result = res['result'];
           this.isResultWaiting = false;
         } else {
           this.nns.create('error',

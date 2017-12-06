@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class AppService {
     GET_RESULT: '/api/getResult'
   };
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   uploadSingleFile(data) {
     return this.http.post(

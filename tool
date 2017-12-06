@@ -36,7 +36,7 @@ fi
 if [ $1 = 'publish' ]
 then 
     cd website
-    npm run-script build
+    npm run-script build --aot
     cd ..
     rm -rf server/dist
     mv website/dist/ server/dist/
