@@ -33,11 +33,6 @@ api.post('/getResult', (req, res) => {
         logger.log(stdout);
         logger.color('red').log(stderr);
         isSuccess = true;
-        return res.json({
-            success: true,
-            result: JSON.parse(stdout),
-            message: 'get the result'
-        })
         if (error !== null) {
             logger.error(error);
             return res.json({
@@ -45,6 +40,11 @@ api.post('/getResult', (req, res) => {
                 message: 'failed to get the result'
             })
         }
+        return res.json({
+            success: true,
+            result: JSON.parse(stdout),
+            message: 'get the result'
+        })
     });
     setTimeout(() => {
         if (!isSuccess) {
